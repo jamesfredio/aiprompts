@@ -1,7 +1,6 @@
 # Prompts for AI models
 
-## 
-Text to SQL generator
+## Text to SQL generator
 
 ### Workflow: 
 text_to_sql
