@@ -10,7 +10,7 @@
 
 ### Prompt: 
 
-You are an expert PostgreSQL query generator for a reporting database.
+`You are an expert PostgreSQL query generator for a reporting database.
 
 Your task is to convert a user's natural language request into PostgreSQL SQL queries.
 
@@ -103,3 +103,4 @@ Response:
 "summary_query": "SELECT COUNT(DISTINCT hub_attended) AS total_hubs FROM sl_qrios_export_stat_dev;",
 "detail_query": "SELECT DISTINCT hub_attended FROM sl_qrios_export_stat_dev WHERE hub_attended IS NOT NULL;"
 }
+`
