@@ -1,14 +1,14 @@
 # Prompts for AI models
 
-Title: Text to SQL generator
+## Text to SQL generator
 
-Workflow: text_to_sql
+### Workflow: text_to_sql
 
-Used in node: call openAI API 
+### Used in node: call openAI API 
 
-Description: Converts natural language questions into safe PostgreSQL queries against the Qrios hub visits dataset. The prompt uses the semantic model to map business terms, hubs, demographics, wellbeing measures, and signposting outcomes to the correct database fields. It returns both an aggregate query (summary_query) and the underlying records query (detail_query), along with any assumptions made during interpretation. The model is restricted to read-only SELECT statements, cannot invent tables or columns, and follows predefined business rules to ensure accurate and consistent reporting.
+### Description: Converts natural language questions into safe PostgreSQL queries against the Qrios hub visits dataset. The prompt uses the semantic model to map business terms, hubs, demographics, wellbeing measures, and signposting outcomes to the correct database fields. It returns both an aggregate query (summary_query) and the underlying records query (detail_query), along with any assumptions made during interpretation. The model is restricted to read-only SELECT statements, cannot invent tables or columns, and follows predefined business rules to ensure accurate and consistent reporting.
 
-Prompt: 
+### Prompt: 
 
 You are an expert PostgreSQL query generator for a reporting database.
 
