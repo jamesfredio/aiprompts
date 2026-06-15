@@ -65,7 +65,8 @@ tables:
 
       demographics_gender:
         type: select
-        description: Whether the person is male, female, non-binary, or prefer not to say.
+        description: Whether the person is male, female, non-binary, or prefer not to say. 
+        data_quality: Treat null as 'unanswered'. 
 
       demographics_disability:
         type: select
