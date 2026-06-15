@@ -1,0 +1,235 @@
+dataset:
+  name: qrios_hub_visits
+  description: >
+    This dataset includes records of people attending a community hub and the advice or signposting they received. It includes information about the person, their wellbeing, experience of the visit and the advice or signposting given. It also includes the user ID and name of the person who recorded the visit.
+
+tables:
+  ndti_qrios_clshub_data:
+    description: This table contains records of visits to community hubs, including which orgnisation the person attended, the date they attended, the reason for attending, details about them, their wellbeing, experience of the visit and the advice or signposting given. It also includes the user ID and name of the person who recorded the visit.
+    primary_key: id
+
+    columns:
+      id:
+        type: integer
+        description: Unique visit record ID
+
+      created_at:
+        type: datetime
+        description: Timestamp for when the visit record was created.
+
+      organisation:
+        type: string
+        description: The organisation id of the user who recorded the visit.
+
+      ip:
+        type: 
+        description: 
+
+      user_created:
+        type: string
+        description: The id of the user who created the record.
+
+      parent_organisation:
+        type: string
+        description: The parent organisation id of the user who recorded the visit.
+
+      partner_organisation:
+        type: string
+        description: The partner organisation id of the user who recorded the visit.
+
+      hub_attended:
+        type: text
+        description: The hub the actual person attended to fill out the form.
+
+      hub_attended_date_attended:
+        type: text
+        important_note: This needs converting to date in a query.
+        description: The date entered in the form of which the person attended the hub.
+        alias: date_attended
+
+      hub_attended_reason_for_visit:
+        type: text
+        description: The reason the person visited the hub.
+
+      first_visit:
+        type: select
+        description: Whether this was the first time the person had attended the hub answers are yes or no.
+
+      demographics_age_band:
+        type: select
+        description: The age band the person falls into.
+      
+      demographics_postcode:
+        type: text
+        description: The postcode of the person.
+
+      demographics_gender:
+        type: select
+        description: Whether the person is male, female, non-binary, or prefer not to say.
+
+      demographics_disability:
+        type: select
+        description: Whether the person has a disability this can be yes or no.
+
+      demographics_ethnicity:
+        type: select
+        description: The ethnicity of the person.
+
+      demographics_ethnicity_detail:
+        type: text
+        description: Further detail about the persons ethnicity.
+
+      demographics_referral:
+        type: text
+        description: How the person was referred to the hub.
+
+      wellbeing_coping:
+        type: select
+        description: Whether the person is coping well with daily challenges. This can be from 0 not at all to 5 completely well.
+
+      wellbeing_connected:
+        type: select
+        description: Whether the person feels connected to those important to them. This can be from 0 not at all to 5 completely.
+
+      wellbeing_control:
+        type: select
+        description: Whether the person feels in control of their life. This can be from 0 not at all to 5 completely.
+
+      wellbeing_safe:
+        type: select
+        description: Whether the person feels safe in their home or community. This can be from 0 not at all to 5 completely.
+
+      wellbeing_support:
+        type: select
+        description: Whether the person feels they can easily access support they need to the things they enjoy. This can be from 0 not at all to 5 completely.
+
+      wellbeing_satisfaction:
+        type: select
+        description: Whether the person is satisfied with their life overall. This can be from 0 not at all to 10 completely.
+
+      experience_venue:
+        type: select
+        description: How suitable the venue was for the person. This can be from 0 not at all to 5 completely.
+
+      experience_welcome:
+        type: select
+        description: How welcomed the person felt when they attended the hub. This can be from 0 not at all to 5 completely.
+
+      experience_accessibility:
+        type: select
+        description: How easy it was to get to the hub when they attended. This can be from 0 not at all to 5 completely.
+
+      experience_info:
+        type: select
+        description: Whether the person felt they received the information they needed at the hub. This can be from 0 not at all to 5 completely.
+
+      experience_outcome:
+        type: select
+        description: Whether the person felt satisfied with the outcome of their visit. This can be from 0 not at all to 5 completely.
+
+      experience_recommend:
+        type: select
+        description: Whether the person would recommend the hub to others. This can be from 0 not at all to 5 completely.
+
+      next_steps:
+        type: multiple-choice
+        description: Advice or signposting given to the person
+        examples:
+          - Introduced to community activity
+          - Connection to Housing
+          - Onward to Adult Social Care
+
+business_terms:
+  asc:
+    means: Adult Social Care
+    maps_to:
+      - reason_for_attending contains "adult social care"
+      - reason_for_attending contains "ASC"
+
+  signposted_to_asc:
+    means: Person was advised to speak to or see Adult Social Care
+    maps_to:
+      - next_steps contains "ASC"
+      - next_steps contains "adult social care"
+      - next_steps contains "social care worker"
+
+metrics:
+  total_visits:
+    description: Count of all visits
+    sql: COUNT(*)
+
+  people_with_asc_reason:
+    description: Count of visits where the reason was Adult Social Care related
+    sql: >
+      COUNT(CASE 
+        WHEN LOWER(reason_for_attending) LIKE '%adult social care%'
+          OR LOWER(reason_for_attending) LIKE '%asc%'
+        THEN 1 
+      END)
+
+  signposted_to_asc_count:
+    description: Count of visits where the next step was to see or contact ASC
+    sql: >
+      COUNT(CASE 
+        WHEN LOWER(next_steps) LIKE '%asc%'
+          OR LOWER(next_steps) LIKE '%adult social care%'
+          OR LOWER(next_steps) LIKE '%social care worker%'
+        THEN 1 
+      END)
+
+rules:
+  - Always use LOWER() when matching free-text fields.
+  - Use COUNT(DISTINCT person_id) only when the user asks about people, not visits.
+  - If the user asks for proportion, return numerator, denominator, and percentage.
+  - Do not invent columns.
+  - Only use tables and columns listed in this semantic model.
+
+example_questions:
+  - question: What proportion of people came in with ASC issues and were signposted to ASC?
+    sql: >
+      SELECT
+        COUNT(CASE 
+          WHEN LOWER(reason_for_attending) LIKE '%adult social care%'
+            OR LOWER(reason_for_attending) LIKE '%asc%'
+          THEN 1 
+        END) AS asc_reason_count,
+
+        COUNT(CASE 
+          WHEN (
+            LOWER(reason_for_attending) LIKE '%adult social care%'
+            OR LOWER(reason_for_attending) LIKE '%asc%'
+          )
+          AND (
+            LOWER(next_steps) LIKE '%asc%'
+            OR LOWER(next_steps) LIKE '%adult social care%'
+            OR LOWER(next_steps) LIKE '%social care worker%'
+          )
+          THEN 1 
+        END) AS asc_reason_and_signposted_count,
+
+        100.0 * COUNT(CASE 
+          WHEN (
+            LOWER(reason_for_attending) LIKE '%adult social care%'
+            OR LOWER(reason_for_attending) LIKE '%asc%'
+          )
+          AND (
+            LOWER(next_steps) LIKE '%asc%'
+            OR LOWER(next_steps) LIKE '%adult social care%'
+            OR LOWER(next_steps) LIKE '%social care worker%'
+          )
+          THEN 1 
+        END)
+        / NULLIF(COUNT(CASE 
+          WHEN LOWER(reason_for_attending) LIKE '%adult social care%'
+            OR LOWER(reason_for_attending) LIKE '%asc%'
+          THEN 1 
+        END), 0) AS percentage
+      FROM visits;
+  - question: How many people attended the hub 'CLiC Clydesdale'
+    sql: >
+      SELECT
+        COUNT(CASE 
+          WHEN LOWER(hub_attended) = 'clic clydesdale'
+          THEN 1 
+        END) AS clic_clydesdale_visits
+      FROM visits;
