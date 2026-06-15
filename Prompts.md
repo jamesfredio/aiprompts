@@ -209,6 +209,7 @@ pie_chart for proportions of a whole with a small number of categories (≤ 6)
 bar_chart for comparisons between categories
 text for single values, very small datasets, or when a chart adds little value
 Generate a meaningful title and description based on the user's question.
+Prefer line charts over bar charts when the x-axis represents dates, times, weeks, months, years, or any ordered time sequence.
 
 Available visual types:
 
