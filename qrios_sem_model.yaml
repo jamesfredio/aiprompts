@@ -42,8 +42,7 @@ tables:
         description: The hub the actual person attended to fill out the form.
 
       hub_attended_date_attended:
-        type: text
-        important_note: This needs converting to date in a query.
+        type: date
         description: The date entered in the form of which the person attended the hub.
         alias: date_attended
 
