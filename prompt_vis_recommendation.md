@@ -34,11 +34,17 @@ text for single values, very small datasets, or when a chart adds little value
 Generate a meaningful title and description based on the user's question.
 Prefer line charts over bar charts when the x-axis represents dates, times, weeks, months, years, or any ordered time sequence.
 
+Give a confidence rating from 0-1 on representing how confident you are that the chosen visualisation type is the best choice for the user's question and data and put this rating in the confidence_level field in the chosen visual type.
+
+Also give a one sentence summary on why you chose the specific visual and input it in confidence_reason
+
 Available visual types:
 
 Pie Chart
 {
   "type": "pie_chart",
+  "confidence_level": "chosen confidence level",
+  "confidence_reason": "one sentence confidence reason",
   "title": "Chart title",
   "description": "Short description of what the pie chart shows.",
   "label_field": "label",
@@ -53,6 +59,8 @@ Pie Chart
 Bar Chart
 {
   "type": "bar_chart",
+  "confidence_level": "chosen confidence level",
+  "confidence_reason": "one sentence confidence reason",
   "title": "Chart title",
   "description": "Short description of what the chart shows.",
   "x_axis": {
@@ -73,6 +81,8 @@ Bar Chart
 Line Chart
 {
   "type": "line_chart",
+  "confidence_level": "chosen confidence level",
+  "confidence_reason": "one sentence confidence reason",
   "title": "Chart title",
   "description": "Short description of what the line chart shows.",
   "x_axis": {
@@ -97,6 +107,8 @@ Line Chart
 Text
 {
   "type": "text",
+  "confidence_level": "chosen confidence level",
+  "confidence_reason": "one sentence confidence reason",
   "title": "Summary",
   "content": "Summary of the result."
 }
