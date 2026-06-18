@@ -21,6 +21,22 @@ tables:
         type: string
         description: The organisation id of the user who recorded the visit.
 
+      organisation_name:
+        type: string
+         description: >
+          The canonical name of the organisation that recorded the visit.
+          This is not the hub attended.
+
+      values:
+        - Scottish Borders
+        - Norfolk
+        - Leeds City Council
+        - Stoke-On-Trent
+         - Gateshead Council
+        - Cheshire West and Chester
+        - South Lanarkshire
+        - NDTI
+        
       ip:
         type: 
         description: 
