@@ -4,7 +4,7 @@ dataset:
     This dataset includes records of people attending a community hub and the advice or signposting they received. It includes information about the person, their wellbeing, experience of the visit and the advice or signposting given. It also includes the user ID and name of the person who recorded the visit.
 
 tables:
-  ndti_qrios_clshub_data:
+  ndti_qrios_clshub_data_june:
     description: This table contains records of visits to community hubs, including which orgnisation the person attended, the date they attended, the reason for attending, details about them, their wellbeing, experience of the visit and the advice or signposting given. It also includes the user ID and name of the person who recorded the visit.
     primary_key: id
 
@@ -18,24 +18,32 @@ tables:
         description: Timestamp for when the visit record was created.
 
       organisation:
-        type: string
-        description: The organisation id of the user who recorded the visit.
+  type: string
+  description: >
+    Internal organisation identifier.
+    This is a system ID and should NOT be used when users ask for organisations
+    such as Scottish Borders, Leeds City Council, Stoke-On-Trent, etc.
+    Only use this field when the user explicitly asks for organisation IDs.
 
-      organisation_name:
-        type: string
-         description: >
-          The canonical name of the organisation that recorded the visit.
-          This is not the hub attended.
+organisation_name:
+  type: string
+  description: >
+    Organisation name/code used for reporting and filtering.
 
-      values:
-        - Scottish Borders
-        - Norfolk
-        - Leeds City Council
-        - Stoke-On-Trent
-        - Gateshead Council
-        - Cheshire West and Chester
-        - South Lanarkshire
-        - NDTI
+    IMPORTANT:
+    Use this field whenever a user refers to an organisation.
+
+    Stored values:
+    SB = Scottish Borders
+    LCC = Leeds City Council
+    Stoke = Stoke-On-Trent
+    Norfolk = Norfolk
+    NDTI = NDTI
+
+    Examples:
+    - "Scottish Borders" -> organisation_name = 'SB'
+    - "Leeds City Council" -> organisation_name = 'LCC'
+    - "Stoke-On-Trent" -> organisation_name = 'Stoke'
         
       ip:
         type: 
