@@ -1,0 +1,28 @@
+dataset:
+  name: barnsley_search
+  description: >
+    This dataset includes records of people attending a community hub and the advice or signposting they received. It includes information about the person, their wellbeing, experience of the visit and the advice or signposting given. It also includes the user ID and name of the person who recorded the visit.
+
+tables:
+  ai_search_requests:
+    description: This table contains ai search requests from the barnsley search tool. It includes the response to the search, time taken to respond and some more useful fields.
+    primary_key: id
+
+    columns:
+      id:
+        type: integer
+        description: Unique search ID
+
+      created_at:
+        type: datetime
+        description: Timestamp for when the visit record was created.
+
+        org_name:
+        type: 
+        description: 
+
+        search_request:
+        type: text
+        description: The actual search request from a public 
+
+        
