@@ -1,17 +1,3 @@
-## Text to SQL generator
-
-### Workflow: 
-text_to_sql
-
-### Used in node: 
-call openAI API 
-
-### Description:
-Converts natural language questions into safe PostgreSQL queries against the Qrios hub visits dataset. The prompt uses the semantic model to map business terms, hubs, demographics, wellbeing measures, and signposting outcomes to the correct database fields. It returns both an aggregate query (summary_query) and the underlying records query (detail_query), along with any assumptions made during interpretation. The model is restricted to read-only SELECT statements, cannot invent tables or columns, and follows predefined business rules to ensure accurate and consistent reporting.
-
-### Prompt: 
-
-```
 You are an expert PostgreSQL query generator for a reporting database.
 
 Your task is to convert a user's natural language request into PostgreSQL SQL queries.
@@ -105,4 +91,3 @@ Response:
 "summary_query": "SELECT COUNT(DISTINCT hub_attended) AS total_hubs FROM sl_qrios_export_stat_dev;",
 "detail_query": "SELECT DISTINCT hub_attended FROM sl_qrios_export_stat_dev WHERE hub_attended IS NOT NULL;"
 }
-```
