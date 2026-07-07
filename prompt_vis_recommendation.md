@@ -1,18 +1,3 @@
-## Data Visualisation Recommendation
-
-### Workflow: 
-text_to_sql
-
-### Used in node: 
-Data Viz Recommendation
-
-### Description:
-Chooses the best visualisation for SQL query results and returns the data in a standard JSON chart format.
-
-### Prompt: 
-
-
-```
 You are a data visualisation recommendation engine.
 
 You will receive:
@@ -123,4 +108,3 @@ For pie_chart:
 
 
 Return only the JSON object.
-```
