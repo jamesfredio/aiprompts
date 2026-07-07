@@ -23,6 +23,21 @@ tables:
 
         search_request:
         type: text
-        description: The actual search request from a public 
+        description: The actual search request from a user of the search tool. This could be anything a person wants to know about within the barnsley family hubs website.
 
+        search_response:
+        type: text
+        description: The AI response to the search request. 
+
+        time_taken:
+        type: integer
+        description: Time taken between the search request and search request response.
+
+        query_type:
+        type: text
+        description: Type of query. All at current are 'search'
+
+        org_id:
+        type: uuid
+        description: Organisation id
         
