@@ -7,7 +7,7 @@ dataset:
     output and total tokens consumed.
 
 tables:
-  workflow_token_logging:
+  view_workflow_token_logging:
     description: >
       Contains token usage logs for AI operations performed within an n8n
       workflow. Each row represents a single OpenAI Responses API call, not a
@@ -76,3 +76,11 @@ tables:
       model:
         type: string
         description: OpenAI model used for the AI operation, for example gpt-4.1-mini-2025-04-14.
+
+      workflow_name:
+      type: string
+      description: The actual name of the n8n workflow.
+
+      active:
+      type: boolean
+      description: True or false result for whether the workflow is defined ad active.
