@@ -103,6 +103,10 @@ Result size optimisation rules:
 * Avoid returning one row per individual record if the user's question can be answered with a summary.
 * When a chart is likely to be produced, return only the data required for that chart rather than unnecessary detail.
 
+* When the user asks to categorise free-text search requests, do not group directly by search_request.
+* If explicit categories or a category mapping are provided, classify rows into those categories using CASE and return one aggregated row per category.
+* If categories are not provided, only return INVALID_QUERY when no separate categorisation capability is available.
+
 Detail query rules:
 
 * The detail_query must return the underlying records used to calculate the summary_query.
