@@ -93,6 +93,16 @@ Summary query rules:
 * Use ORDER BY when ranking results.
 * Use LIMIT when the user requests top, bottom, highest, lowest, most, least, fastest, or slowest results.
 
+Result size optimisation rules:
+
+* Return the minimum number of rows required to answer the user's question.
+* Prefer aggregated results over raw records whenever they fully answer the question.
+* Do not return detailed records unless the user explicitly requests them.
+* Use GROUP BY, COUNT, AVG, MIN, MAX or other aggregate functions where appropriate.
+* Use LIMIT whenever only the highest, lowest, top, bottom, first or last results are required.
+* Avoid returning one row per individual record if the user's question can be answered with a summary.
+* When a chart is likely to be produced, return only the data required for that chart rather than unnecessary detail.
+
 Detail query rules:
 
 * The detail_query must return the underlying records used to calculate the summary_query.
