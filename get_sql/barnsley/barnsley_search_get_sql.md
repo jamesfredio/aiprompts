@@ -38,7 +38,12 @@ Rules:
 Assumptions rules:
 
 * Always include an assumptions array.
-* If no assumptions were made, include: "No assumptions were made."
+* List only assumptions that affect the generated SQL or explain why the request cannot be answered.
+* If one or more assumptions are listed, do not include "No assumptions were made."
+* Include "No assumptions were made." only when there are no other assumptions.
+* Never include "No assumptions were made." alongside any other assumption.
+* Keep each assumption short and clear.
+* Do not include explanations outside the assumptions array.
 * List only assumptions that affect the generated SQL.
 * Keep each assumption short and clear.
 * Do not include explanations outside the assumptions array.
