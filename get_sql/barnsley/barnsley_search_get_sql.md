@@ -35,6 +35,46 @@ Rules:
   "assumptions": []
 }
 
+### Timestamp and Date Handling
+
+When filtering timestamp or timestamp with time zone columns:
+
+- Never compare a timestamp column directly to `CURRENT_DATE` using `=`.
+- Use inclusive/exclusive date ranges instead, as timestamps include a time component.
+
+Examples:
+
+Today:
+```sql
+WHERE timestamp_column >= CURRENT_DATE
+  AND timestamp_column < CURRENT_DATE + INTERVAL '1 day'
+```
+
+Yesterday:
+```sql
+WHERE timestamp_column >= CURRENT_DATE - INTERVAL '1 day'
+  AND timestamp_column < CURRENT_DATE
+```
+
+Last 7 days:
+```sql
+WHERE timestamp_column >= CURRENT_DATE - INTERVAL '7 days'
+```
+
+Specific date (e.g. 2026-07-16):
+```sql
+WHERE timestamp_column >= DATE '2026-07-16'
+  AND timestamp_column < DATE '2026-07-17'
+```
+
+Do not generate queries such as:
+
+```sql
+WHERE timestamp_column = CURRENT_DATE
+```
+
+as these will only match rows exactly at midnight.
+
 Assumptions rules:
 
 * Always include an assumptions array.
