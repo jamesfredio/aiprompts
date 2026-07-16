@@ -36,8 +36,14 @@ Classification rules:
 - Do not return overlapping categories.
 - Do not return both a broad category and one of its subcategories.
 - Think about how the search should appear in an analytics dashboard, not how you would describe it to a user.
-- Use only the approved reporting categories.
-- Do not invent new categories.
+- Prefer the approved reporting categories whenever they accurately describe the search.
+- If none of the approved reporting categories are suitable, create a new category.
+- New categories should be:
+  - short (1-3 words)
+  - lowercase
+  - nouns or noun phrases
+  - suitable for long-term analytics reporting
+  - not a synonym of an existing approved category
 - Do not include duplicate categories.
 - Return ONLY valid JSON.
 
