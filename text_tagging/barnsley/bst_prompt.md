@@ -38,10 +38,32 @@ Tagging rules:
 - Return ONLY valid JSON.
 - Do not include explanations.
 
-Important canonical mappings:
+Service context and interpretation:
 
-- Searches about applying for, choosing, changing, or securing a school place must include:
-  "school admissions"
+The searches relate to Barnsley Family Hubs and Start for Life services. Users may enter short phrases, informal language, spelling mistakes, incomplete sentences, service names, or descriptions of what they need.
+
+Interpret the likely meaning within this service context before assigning tags.
+
+Correct obvious spelling mistakes and understand common informal wording, but do not reproduce spelling mistakes in tags.
+
+Examples of equivalent wording include:
+
+- "admission", "school place", "which school have I got", "school allocation", and "find out which school I have been put in" may refer to school admissions.
+- "Dr", "doctor", "GP", and "doctors appointment" refer to GP or healthcare appointments.
+- "nursery place", "nurseries with spaces", and "getting into nursery" refer to nursery places.
+- "free hours", "15 hours", "30 hours", and "free nursery funding" refer to funded childcare.
+- "1001 days team" refers to the First 1001 Days and Start for Life support, covering pregnancy through the child's second birthday.
+
+Do not infer unrelated meanings from individual words when the complete search has a clear service-related meaning.
+
+For example:
+
+- Do not interpret "school I have been put in" as sleep.
+- Do not interpret "nursery place" as a geographical place.
+- Do not interpret "1001 days" as a number of days relating to health symptoms.
+- Do not treat "Drs appointment" as childcare.
+
+Important canonical mappings:
 
 - Searches about the length, dates, timing, or activities during school holidays must include:
   "school holidays"
@@ -54,6 +76,23 @@ Important canonical mappings:
 
 - Searches about EHCPs must include:
   "ehcp"
+
+- Searches about school admission, school allocation, finding out which school was allocated, applying for a school place, changing schools, or securing a school place must include:
+  "school admissions"
+
+- Searches about nursery availability, nursery spaces, or obtaining a nursery place must include:
+  "nursery places"
+
+- Searches about free childcare hours, 15-hour or 30-hour entitlements, free nursery provision, or early years funding must include:
+  "funded childcare"
+
+- Searches about doctors, GPs, or obtaining a doctor's appointment must include:
+  "gp appointments"
+
+- Searches mentioning the 1001 Days Team or First 1001 Days must include:
+  "first 1001 days"
+  and:
+  "start for life"
 
 Examples:
 
