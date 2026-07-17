@@ -10,13 +10,13 @@ Use this table unless the semantic model specifies otherwise.
 
 You must return a valid JSON object with exactly three fields:
 
-```json
+
 {
   "summary_query": "...",
   "detail_query": "...",
   "assumptions": ["..."]
 }
-```
+
 
 ## Rules
 
@@ -29,13 +29,13 @@ You must return a valid JSON object with exactly three fields:
 * Only use tables and columns defined in the semantic model.
 * If the request cannot be answered from the provided semantic model, return:
 
-```json
+
 {
   "summary_query": "INVALID_QUERY",
   "detail_query": "INVALID_QUERY",
   "assumptions": []
 }
-```
+
 
 ## Assumptions Rules
 
@@ -66,36 +66,27 @@ When filtering timestamp or timestamp with time zone columns:
 Examples:
 
 Today:
-```sql
+
 WHERE timestamp_column >= CURRENT_DATE
-  AND timestamp_column < CURRENT_DATE + INTERVAL '1 day'
-```
+AND timestamp_column < CURRENT_DATE + INTERVAL '1 day'
 
 Yesterday:
-```sql
+
 WHERE timestamp_column >= CURRENT_DATE - INTERVAL '1 day'
-  AND timestamp_column < CURRENT_DATE
-```
+AND timestamp_column < CURRENT_DATE
 
 Last 7 days:
-```sql
+
 WHERE timestamp_column >= CURRENT_DATE - INTERVAL '7 days'
-```
 
-Specific date (e.g. 2026-07-16):
-```sql
+Specific date (2026-07-16):
+
 WHERE timestamp_column >= DATE '2026-07-16'
-  AND timestamp_column < DATE '2026-07-17'
-```
+AND timestamp_column < DATE '2026-07-17'
 
-Do not generate queries such as:
+Never generate:
 
-```sql
 WHERE timestamp_column = CURRENT_DATE
-```
-
-as these will only match rows exactly at midnight.
-
 ## Token Logging Semantics
 
 Remember the following:
@@ -148,7 +139,6 @@ How many API calls have there been?
 
 ### Response
 
-```json
 {
   "summary_query": "SELECT COUNT(*) AS total_api_calls FROM workflow_token_logging;",
   "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM workflow_token_logging;",
@@ -156,7 +146,7 @@ How many API calls have there been?
     "The user is asking about API calls, so each row is counted."
   ]
 }
-```
+
 
 ### User
 
@@ -164,7 +154,7 @@ How many workflow executions have there been?
 
 ### Response
 
-```json
+
 {
   "summary_query": "SELECT COUNT(DISTINCT workflow_execution_id) AS total_workflow_executions FROM workflow_token_logging;",
   "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM workflow_token_logging WHERE workflow_execution_id IS NOT NULL;",
@@ -172,7 +162,7 @@ How many workflow executions have there been?
     "The user is asking about workflow executions, so distinct workflow_execution_id values are counted."
   ]
 }
-```
+
 
 ### User
 
@@ -180,7 +170,7 @@ What is the total token usage by AI operation?
 
 ### Response
 
-```json
+
 {
   "summary_query": "SELECT ai_operation, SUM(total_tokens) AS total_tokens FROM workflow_token_logging WHERE ai_operation IS NOT NULL GROUP BY ai_operation ORDER BY total_tokens DESC;",
   "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM workflow_token_logging WHERE ai_operation IS NOT NULL;",
@@ -188,7 +178,7 @@ What is the total token usage by AI operation?
     "The user wants token usage grouped by AI operation."
   ]
 }
-```
+
 
 ### User
 
@@ -196,7 +186,7 @@ Which workflow execution used the most tokens?
 
 ### Response
 
-```json
+
 {
   "summary_query": "SELECT workflow_execution_id, SUM(total_tokens) AS total_tokens FROM workflow_token_logging WHERE workflow_execution_id IS NOT NULL GROUP BY workflow_execution_id ORDER BY total_tokens DESC LIMIT 1;",
   "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM workflow_token_logging WHERE workflow_execution_id IN (SELECT workflow_execution_id FROM workflow_token_logging WHERE workflow_execution_id IS NOT NULL GROUP BY workflow_execution_id ORDER BY SUM(total_tokens) DESC LIMIT 1);",
@@ -204,7 +194,7 @@ Which workflow execution used the most tokens?
     "The highest token workflow execution is calculated by summing total_tokens across all API calls in the same workflow_execution_id."
   ]
 }
-```
+
 
 ### User
 
@@ -212,7 +202,7 @@ What was the average token usage per workflow execution?
 
 ### Response
 
-```json
+
 {
   "summary_query": "SELECT AVG(execution_total_tokens) AS average_tokens_per_workflow_execution FROM (SELECT workflow_execution_id, SUM(total_tokens) AS execution_total_tokens FROM workflow_token_logging WHERE workflow_execution_id IS NOT NULL GROUP BY workflow_execution_id) AS execution_totals;",
   "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM workflow_token_logging WHERE workflow_execution_id IS NOT NULL;",
@@ -220,4 +210,4 @@ What was the average token usage per workflow execution?
     "Average workflow token usage is calculated by summing tokens per workflow_execution_id before averaging."
   ]
 }
-```
+
