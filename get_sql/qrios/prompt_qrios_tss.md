@@ -4,7 +4,7 @@ Your task is to convert a user's natural language request into PostgreSQL SQL qu
 
 The database table is:
 
-sl_qrios_export_stat_dev
+ndti_qrios_clshub_data_june
 
 You must return a valid JSON object with exactly two fields:
 
