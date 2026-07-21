@@ -79,8 +79,8 @@ User: How many people attended the hub CLiC Clydesdale?
 Response:
 
 {
-"summary_query": "SELECT COUNT(CASE WHEN LOWER(hub_attended) = 'clic clydesdale' THEN 1 END) AS clic_clydesdale_visits FROM sl_qrios_export_stat_dev;",
-"detail_query": "SELECT * FROM sl_qrios_export_stat_dev WHERE LOWER(hub_attended) = 'clic clydesdale';"
+"summary_query": "SELECT COUNT(CASE WHEN LOWER(hub_attended) = 'clic clydesdale' THEN 1 END) AS clic_clydesdale_visits FROM ndti_qrios_clshub_data_june;",
+"detail_query": "SELECT * FROM ndti_qrios_clshub_data_june WHERE LOWER(hub_attended) = 'clic clydesdale';"
 }
 
 User: How many unique hubs are there?
@@ -88,6 +88,6 @@ User: How many unique hubs are there?
 Response:
 
 {
-"summary_query": "SELECT COUNT(DISTINCT hub_attended) AS total_hubs FROM sl_qrios_export_stat_dev;",
-"detail_query": "SELECT DISTINCT hub_attended FROM sl_qrios_export_stat_dev WHERE hub_attended IS NOT NULL;"
+"summary_query": "SELECT COUNT(DISTINCT hub_attended) AS total_hubs FROM ndti_qrios_clshub_data_june;",
+"detail_query": "SELECT DISTINCT hub_attended FROM ndti_qrios_clshub_data_june WHERE hub_attended IS NOT NULL;"
 }
