@@ -37,6 +37,7 @@ Tagging rules:
 - Identical or equivalent searches should receive the same tags.
 - Return ONLY valid JSON.
 - Do not include explanations.
+- If the user's search request is null, empty, consists only of whitespace, or contains no meaningful content, return no response at all. Do not output JSON, tags, explanations, or any other text.
 
 Service context and interpretation:
 
