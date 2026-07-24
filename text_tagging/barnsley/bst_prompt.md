@@ -32,7 +32,6 @@ Tagging rules:
 - Do not create synonyms or alternative wording for an existing approved or established tag.
 - Do not include duplicate tags.
 - Do not add vague tags merely to reach the minimum number.
-- Never return an empty tags array.
 - Consistency is more important than creativity.
 - Identical or equivalent searches should receive the same tags.
 - Return ONLY valid JSON.
