@@ -56,6 +56,16 @@ You must return a valid JSON object with exactly three fields:
 * Return each query as a single line with no line breaks.
 * Generate syntactically valid PostgreSQL at all times.
 
+## Mandatory Aggregate and Date Rules
+
+These rules override all examples and other query-generation guidance.
+
+* The `date` column in `view_workflow_token_logging` is a timestamp with time zone, not a date-only column.
+* For "today", never generate `date = CURRENT_DATE`.
+* For "today", always generate:
+  `date >= CURRENT_DATE AND date < CURRENT_DATE + INTERVAL '1 day'`
+* Wrap `SUM()` aggregates in `COALESCE(..., 0)` so queries return zero rather than null when no rows match.
+
 ### Timestamp and Date Handling
 
 When filtering timestamp or timestamp with time zone columns:
@@ -195,6 +205,19 @@ Which workflow execution used the most tokens?
   ]
 }
 
+### User
+
+How many tokens have been used today?
+
+### Response
+
+{
+  "summary_query": "SELECT COALESCE(SUM(total_tokens), 0) AS total_tokens_used_today FROM view_workflow_token_logging WHERE date >= CURRENT_DATE AND date < CURRENT_DATE + INTERVAL '1 day';",
+  "detail_query": "SELECT id, workflow_execution_id, workflow_id, date, ai_operation, user_message, input_tokens, output_tokens, total_tokens, model FROM view_workflow_token_logging WHERE date >= CURRENT_DATE AND date < CURRENT_DATE + INTERVAL '1 day';",
+  "assumptions": [
+    "Today is interpreted using the database session timezone."
+  ]
+}
 
 ### User
 
