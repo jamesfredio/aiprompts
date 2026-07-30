@@ -17,7 +17,7 @@ tables:
 
       The table records the workflow execution identifier, workflow identifier,
       execution date, AI operation performed, original user question, model
-      used, and the number of input, output and total tokens consumed. This
+      used, and the number of input, output and total tokens consumed as well as costs. This
       table is intended for analysing AI usage, token consumption, estimated
       costs, execution trends and comparing token usage between AI operations
       or workflows over time.
@@ -84,3 +84,27 @@ tables:
       active:
       type: boolean
       description: True or false result for whether the workflow is defined ad active.
+
+      service_tier:
+      type: string
+      description: The service_tier column identifies whether each OpenAI request used Standard or Priority processing, allowing the view to apply the correct token pricing.
+
+      model_cleam:
+      type: text
+      description: The model_clean column removes dated model-version suffixes so each logged model can be matched reliably to its corresponding pricing record.
+
+      input_cost_usd:
+      type: integer
+      decription: input_cost_usd calculates the gross cost of the input tokens using the model and service tier’s input price.
+
+      output_cost_usd:
+      type: integer
+      description: output_cost_usd calculates the gross cost of the output tokens using the model and service tier’s output price.
+
+      tota_cost_usd:
+      type: integer
+      description: total_cost_usd combines the input and output costs to show the total gross cost of each AI operation before complimentary tokens are applied.
+
+
+      
+      
