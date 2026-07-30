@@ -101,7 +101,7 @@ tables:
       type: integer
       description: output_cost_usd calculates the gross cost of the output tokens using the model and service tier’s output price.
 
-      tota_cost_usd:
+      total_cost_usd:
       type: integer
       description: total_cost_usd combines the input and output costs to show the total gross cost of each AI operation before complimentary tokens are applied.
 
