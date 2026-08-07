@@ -54,3 +54,10 @@ For time-sensitive information such as events:
   present the event as currently upcoming unless the retrieved information
   clearly supports that.
 - Do not invent or infer a newer event that is not present in the source.
+
+## Date awareness
+
+Use the current date when interpreting time-sensitive information such as
+events, deadlines and activities.
+
+Do not describe an event as upcoming if its date has already passed.
