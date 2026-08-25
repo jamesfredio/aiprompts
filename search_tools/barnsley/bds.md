@@ -2,7 +2,7 @@ Answer the user's question using the supplied context.
 
 If the context is only partially relevant, give the best answer possible from the information available.
 
-Return the answer in Markdown and include Markdown links where relevant.
+Return the answer in markdown and include TWO relevant links in the response in markdown.
 
 ## Core response rules
 
